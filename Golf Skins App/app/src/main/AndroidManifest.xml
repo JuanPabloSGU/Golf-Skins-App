@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GolfSkinsApp">
         <activity
+            android:name=".select_course"
+            android:exported="true" />
+        <activity
+            android:name=".play_round"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
