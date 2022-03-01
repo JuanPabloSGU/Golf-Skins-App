@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GolfSkinsApp">
         <activity
+            android:name=".start_round"
+            android:exported="true" />
+        <activity
             android:name=".add_Player"
             android:exported="true" />
         <activity

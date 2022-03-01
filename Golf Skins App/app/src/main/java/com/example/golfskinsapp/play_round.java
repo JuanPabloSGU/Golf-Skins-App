@@ -21,7 +21,7 @@ public class play_round extends AppCompatActivity {
     private ArrayList<Player> players = new ArrayList<Player>();
 
     TextView round_header;
-    Button add_player;
+    Button add_player, start_round;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +30,19 @@ public class play_round extends AppCompatActivity {
 
         round_header = findViewById(R.id.round_header);
         add_player = findViewById(R.id.add_player);
+        start_round = findViewById(R.id.start_round);
 
         add_player.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 OnSetAddPlayer(view);
+            }
+        });
+
+        start_round.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OnSetStartRound(view);
             }
         });
     }
@@ -69,6 +77,11 @@ public class play_round extends AppCompatActivity {
                     }
                 }
             });
+
+    public void OnSetStartRound(View view) {
+        Intent intent = new Intent(getApplicationContext(), start_round.class);
+        play_round.this.startActivity(intent);
+    }
 
     private String[] parseData(String info) {
         return info.split(", ");

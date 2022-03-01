@@ -104,5 +104,17 @@
             android:textSize="24sp"
             android:text="" />
 
+        <Button
+            android:id="@+id/start_round"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeMinTextSize="18sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/arvo"
+            android:text="Start Round" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
