@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ public class play_round extends AppCompatActivity {
     private ArrayList<Player> players = new ArrayList<Player>();
 
     TextView round_header;
-    Button add_player, start_round;
+    Button add_player, start_round, select_course;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,11 @@ public class play_round extends AppCompatActivity {
         setContentView(R.layout.activity_play_round);
 
         round_header = findViewById(R.id.round_header);
+        select_course = findViewById(R.id.select_course);
         add_player = findViewById(R.id.add_player);
         start_round = findViewById(R.id.start_round);
+
+        update_button();
 
         add_player.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +49,13 @@ public class play_round extends AppCompatActivity {
                 OnSetStartRound(view);
             }
         });
+
+        select_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                OnSetSelectCourse(view);
+            }
+        });
     }
 
     public void OnSetAddPlayer(View view) {
@@ -57,11 +68,7 @@ public class play_round extends AppCompatActivity {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-
-                    if(player_count >= 4){
-                        return;
-                    }
-
+                    update_button();
                     player_count++;
 
                     if(result.getResultCode() == Activity.RESULT_OK) {
@@ -74,6 +81,24 @@ public class play_round extends AppCompatActivity {
                         ));
 
                         update_text_view(player_count, players.get(player_count - 1));
+                    }
+                }
+            });
+
+    public void OnSetSelectCourse(View view) {
+        Intent intent = new Intent(getApplicationContext(), select_course.class);
+        selectCourseActivityResultLauncher.launch(intent);
+    }
+
+    ActivityResultLauncher<Intent> selectCourseActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+
+                    if(result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        // Get chosen Course data
                     }
                 }
             });
@@ -106,6 +131,25 @@ public class play_round extends AppCompatActivity {
                 current_player = findViewById(R.id.player_4);
                 current_player.setText(player.getPlayerInfo());
                 break;
+        }
+    }
+
+    private void update_button() {
+        if(player_count >= 3){
+            // Update so that the user can't add another player
+            add_player.setEnabled(false);
+            add_player.setBackgroundColor(Color.LTGRAY);
+            add_player.setTextColor(Color.BLACK);
+        }
+
+        if(player_count != 3){
+            start_round.setEnabled(false);
+            start_round.setBackgroundColor(Color.LTGRAY);
+            start_round.setTextColor(Color.BLACK);
+        }else if (player_count == 3){
+            start_round.setEnabled(true);
+            start_round.setBackgroundColor(Color.RED);
+            start_round.setTextColor(Color.BLACK);
         }
     }
 }

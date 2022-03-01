@@ -33,18 +33,6 @@
             android:textSize="42sp" />
 
         <Button
-            android:id="@+id/select_course"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:autoSizeMaxTextSize="24sp"
-            android:autoSizeMinTextSize="18sp"
-            android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
-            android:text="Select A Course"
-            android:fontFamily="@font/arvo"/>
-
-        <Button
             android:id="@+id/play_round"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

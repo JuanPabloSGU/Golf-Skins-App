@@ -33,6 +33,8 @@ public class add_Player extends AppCompatActivity {
             public void onClick(View view) {
                 //System.out.println(player_name.getText().toString() + ", " + player_handicap.getText().toString());
                 try{
+                    if(!(valid_user() && valid_handicap())) { return; }
+
                     String information = player_name.getText().toString() + ", " + player_handicap.getText().toString();
 
                     Intent returnIntent = new Intent();
@@ -46,5 +48,35 @@ public class add_Player extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private boolean valid_user() {
+        String name = player_name.getText().toString().trim();
+
+        if(name.isEmpty()){
+            player_name.setError("A proper name is required");
+            player_name.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean valid_handicap() {
+        String handicap = player_handicap.getText().toString().trim();
+
+        if(handicap.isEmpty()){
+            player_handicap.setError("A proper handicap is required");
+            player_handicap.requestFocus();
+            return false;
+        }
+
+        try {
+            Float.parseFloat(handicap);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return true;
     }
 }
