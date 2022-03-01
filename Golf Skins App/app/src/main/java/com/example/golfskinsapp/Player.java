@@ -10,7 +10,7 @@ public class Player {
     }
 
     public String getPlayerInfo() {
-        String result = name + "with a handicap of " + handicap;
+        String result = name + " with a handicap of " + handicap;
         return result;
     }
 }

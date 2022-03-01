@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".play_round">
+    tools:context=".add_Player">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/round_header"
+            android:id="@+id/add_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
@@ -27,13 +27,43 @@
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
             android:fontFamily="@font/arvo"
-            android:text="Add Group with Handicap"
+            android:text="Input Player Information"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/player_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeMinTextSize="18sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:ems="10"
+            android:fontFamily="@font/arvo"
+            android:hint="Enter Golfers Name : "
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/player_handicap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeMinTextSize="18sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:ems="10"
+            android:fontFamily="@font/arvo"
+            android:hint="Enter Golfers Handicap : "
+            android:inputType="numberDecimal"
+            android:minHeight="48dp" />
 
         <Button
-            android:id="@+id/add_player"
+            android:id="@+id/submit_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -42,67 +72,8 @@
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
             android:fontFamily="@font/arvo"
-            android:text="Add Player" />
-
-        <TextView
-            android:id="@+id/player_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:autoSizeMaxTextSize="100sp"
-            android:autoSizeMinTextSize="16sp"
-            android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/arvo"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:text="" />
-
-        <TextView
-            android:id="@+id/player_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:autoSizeMaxTextSize="100sp"
-            android:autoSizeMinTextSize="16sp"
-            android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/arvo"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:text="" />
-
-        <TextView
-            android:id="@+id/player_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:autoSizeMaxTextSize="100sp"
-            android:autoSizeMinTextSize="16sp"
-            android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/arvo"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:text="" />
-
-        <TextView
-            android:id="@+id/player_4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autoSizeMaxTextSize="100sp"
-            android:autoSizeMinTextSize="16sp"
-            android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/arvo"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:text="" />
+            android:text="Create Player" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
