@@ -11,6 +11,10 @@ public class Group {
         this.course = course;
     }
 
+    public String getCourseInfo() {
+        return this.course.get_course_info();
+    }
+
     public String getGroupInfo() {
 
         String result = "";

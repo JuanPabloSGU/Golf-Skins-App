@@ -4,24 +4,38 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class play_round extends AppCompatActivity {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private int player_count = 0;
     private boolean chose_course = false;
     private ArrayList<Player> players = new ArrayList<Player>();
     private Course course;
+
+    private Group group;
 
     TextView round_header;
     Button add_player, start_round, select_course;
@@ -113,6 +127,9 @@ public class play_round extends AppCompatActivity {
 
     public void OnSetStartRound(View view) {
         Intent intent = new Intent(getApplicationContext(), start_round.class);
+
+        add_to_db();
+
         play_round.this.startActivity(intent);
     }
 
@@ -162,5 +179,29 @@ public class play_round extends AppCompatActivity {
         button.setEnabled(visible);
         button.setBackgroundColor(prime);
         button.setTextColor(secondary);
+    }
+
+    private void add_to_db() {
+        group = new Group(players, course);
+
+        System.out.println("Is this working?");
+
+        Map<String, Object> group_this = new HashMap<>();
+        group_this.put("group", group);
+
+        db.collection("Group")
+                .add(group_this)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("Group Saved", "Group has been saved");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Group Saved", "Group has not been saved");
+                    }
+                });
     }
 }
