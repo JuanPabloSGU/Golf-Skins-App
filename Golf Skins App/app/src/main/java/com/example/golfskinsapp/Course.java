@@ -1,6 +1,5 @@
 package com.example.golfskinsapp;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Course {
@@ -23,8 +22,10 @@ public class Course {
     public String get_course_info() {
         String result = "";
 
+        int index = 0;
         for(Hole current_hole : this.course) {
-            result += "Current Info : " + current_hole.getHoleInfo() + "\n";
+            index += 1;
+            result += "Current Hole : " + index + " That is a : " + current_hole.getHoleInfo() + "\n";
         }
 
         return result;
@@ -73,5 +74,4 @@ public class Course {
         this.course.add(16, new Hole(4,14));
         this.course.add(17, new Hole(4,6));
     }
-
 }

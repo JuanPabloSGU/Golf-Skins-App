@@ -9,6 +9,14 @@ public class Hole {
         this.stroke_index = stroke_index;
     }
 
+    public int get_par() {
+        return par;
+    }
+
+    public int get_stroke_index() {
+        return stroke_index;
+    }
+
     public String getHoleInfo() {
         return "Par : " + par + ", Stroke Index : " + stroke_index;
     }

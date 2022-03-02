@@ -21,6 +21,7 @@ public class play_round extends AppCompatActivity {
     private int player_count = 0;
     private boolean chose_course = false;
     private ArrayList<Player> players = new ArrayList<Player>();
+    private Course course;
 
     TextView round_header;
     Button add_player, start_round, select_course;
@@ -105,9 +106,7 @@ public class play_round extends AppCompatActivity {
 
                         // Use data to chose the course that the user has selected.
                         // Update the database. -> Later
-                        Course course = new Course(chosen_course);
-
-                        System.out.println(course.get_course_info());
+                        course = new Course(chosen_course);
                     }
                 }
             });
@@ -146,19 +145,21 @@ public class play_round extends AppCompatActivity {
     private void update_button() {
         if(player_count >= 3){
             // Update so that the user can't add another player
-            update_button_settings(add_player, Color.LTGRAY, Color.BLACK);
+            update_button_settings(add_player, Color.LTGRAY, Color.BLACK, false);
         }
 
         if(player_count != 3){
-            update_button_settings(start_round, Color.LTGRAY, Color.BLACK);
-        }else if (player_count == 3 && chose_course){
+            update_button_settings(start_round, Color.LTGRAY, Color.BLACK, false);
+        }
+
+        if (player_count == 3 && chose_course){
             // Ready to play
-            update_button_settings(start_round, Color.RED, Color.BLACK);
+            update_button_settings(start_round, Color.RED, Color.BLACK, true);
         }
     }
 
-    private void update_button_settings(Button button, int prime, int secondary) {
-        button.setEnabled(true);
+    private void update_button_settings(Button button, int prime, int secondary, boolean visible) {
+        button.setEnabled(visible);
         button.setBackgroundColor(prime);
         button.setTextColor(secondary);
     }
