@@ -182,15 +182,16 @@ public class play_round extends AppCompatActivity {
     }
 
     private void add_to_db() {
+
         group = new Group(players, course);
 
-        System.out.println("Is this working?");
+        Map<String, Object> data = new HashMap<>();
+        data.put("group", group);
+        data.put("Players", players);
+        data.put("course", course);
 
-        Map<String, Object> group_this = new HashMap<>();
-        group_this.put("group", group);
-
-        db.collection("Group")
-                .add(group_this)
+        db.collection("Game")
+                .add(data)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
