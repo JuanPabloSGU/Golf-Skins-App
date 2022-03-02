@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "980187437477",
+    "project_id": "golfskinapp",
+    "storage_bucket": "golfskinapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980187437477:android:324d28741c57149776704c",
+        "android_client_info": {
+          "package_name": "com.example.golfskinsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980187437477-0tmjkb0khoid0vgfr37ct6f3dqq1mhoh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbvhV3gMF91T51SEsKHgdlGJVL-Q1f4VM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980187437477-0tmjkb0khoid0vgfr37ct6f3dqq1mhoh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
