@@ -9,9 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
-
 public class add_Player extends AppCompatActivity {
 
     TextView add_header;
@@ -37,10 +34,10 @@ public class add_Player extends AppCompatActivity {
 
                     String information = player_name.getText().toString() + ", " + player_handicap.getText().toString();
 
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("Player", information);
+                    Intent return_intent = new Intent();
+                    return_intent.putExtra("Player", information);
 
-                    setResult(RESULT_OK, returnIntent);
+                    setResult(RESULT_OK, return_intent);
                     finish();
 
                 }catch (Exception e){

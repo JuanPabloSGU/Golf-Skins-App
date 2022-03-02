@@ -105,6 +105,18 @@
             android:text="" />
 
         <Button
+            android:id="@+id/select_course"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeMinTextSize="18sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/arvo"
+            android:text="Select Course" />
+
+        <Button
             android:id="@+id/start_round"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -115,19 +127,6 @@
             android:autoSizeTextType="uniform"
             android:fontFamily="@font/arvo"
             android:text="Start Round" />
-
-        <Button
-            android:id="@+id/select_course"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:autoSizeMaxTextSize="24sp"
-            android:autoSizeMinTextSize="18sp"
-            android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/arvo"
-            android:text="Select Course"
-            />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class play_round extends AppCompatActivity {
 
     private int player_count = 0;
+    private boolean chose_course = false;
     private ArrayList<Player> players = new ArrayList<Player>();
 
     TextView round_header;
@@ -98,7 +99,15 @@ public class play_round extends AppCompatActivity {
 
                     if(result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
+                        chose_course = true;
                         // Get chosen Course data
+                        String chosen_course = data.getExtras().getString("course_name");
+
+                        // Use data to chose the course that the user has selected.
+                        // Update the database. -> Later
+                        Course course = new Course(chosen_course);
+
+                        System.out.println(course.get_course_info());
                     }
                 }
             });
@@ -137,19 +146,20 @@ public class play_round extends AppCompatActivity {
     private void update_button() {
         if(player_count >= 3){
             // Update so that the user can't add another player
-            add_player.setEnabled(false);
-            add_player.setBackgroundColor(Color.LTGRAY);
-            add_player.setTextColor(Color.BLACK);
+            update_button_settings(add_player, Color.LTGRAY, Color.BLACK);
         }
 
         if(player_count != 3){
-            start_round.setEnabled(false);
-            start_round.setBackgroundColor(Color.LTGRAY);
-            start_round.setTextColor(Color.BLACK);
-        }else if (player_count == 3){
-            start_round.setEnabled(true);
-            start_round.setBackgroundColor(Color.RED);
-            start_round.setTextColor(Color.BLACK);
+            update_button_settings(start_round, Color.LTGRAY, Color.BLACK);
+        }else if (player_count == 3 && chose_course){
+            // Ready to play
+            update_button_settings(start_round, Color.RED, Color.BLACK);
         }
+    }
+
+    private void update_button_settings(Button button, int prime, int secondary) {
+        button.setEnabled(true);
+        button.setBackgroundColor(prime);
+        button.setTextColor(secondary);
     }
 }

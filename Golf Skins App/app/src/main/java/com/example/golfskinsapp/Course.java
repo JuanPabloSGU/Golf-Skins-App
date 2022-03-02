@@ -1,54 +1,77 @@
 package com.example.golfskinsapp;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Course {
 
-    private ArrayList<Hole> north_course = new ArrayList<Hole>();
-    private ArrayList<Hole> south_course = new ArrayList<Hole>();
+    private ArrayList<Hole> course;
+
+    public Course(String course) {
+        this.course = new ArrayList<Hole>(17);
+
+        switch (course){
+            case "north" :
+                set_up_north_course();
+                break;
+            case "south" :
+                set_up_south_course();
+                break;
+        }
+    }
+
+    public String get_course_info() {
+        String result = "";
+
+        for(Hole current_hole : this.course) {
+            result += "Current Info : " + current_hole.getHoleInfo() + "\n";
+        }
+
+        return result;
+    }
 
     private void set_up_north_course() {
-        north_course.set(0, new Hole(4,7));
-        north_course.set(1, new Hole(5,13));
-        north_course.set(2, new Hole(3,9));
-        north_course.set(3, new Hole(4,3));
-        north_course.set(4, new Hole(4,1));
-        north_course.set(5, new Hole(4,5));
-        north_course.set(6, new Hole(3,11));
-        north_course.set(7, new Hole(5,15));
-        north_course.set(8, new Hole(4,17));
+        this.course.add(0, new Hole(4,7));
+        this.course.add(1, new Hole(5,13));
+        this.course.add(2, new Hole(3,9));
+        this.course.add(3, new Hole(4,3));
+        this.course.add(4, new Hole(4,1));
+        this.course.add(5, new Hole(4,5));
+        this.course.add(6, new Hole(3,11));
+        this.course.add(7, new Hole(5,15));
+        this.course.add(8, new Hole(4,17));
 
-        north_course.set(9, new Hole(4,4));
-        north_course.set(10, new Hole(4,12));
-        north_course.set(11, new Hole(3,14));
-        north_course.set(12, new Hole(5,16));
-        north_course.set(13, new Hole(3,6));
-        north_course.set(14, new Hole(5,18));
-        north_course.set(15, new Hole(4,2));
-        north_course.set(16, new Hole(4,10));
-        north_course.set(17, new Hole(4,8));
+        this.course.add(9, new Hole(4,4));
+        this.course.add(10, new Hole(4,12));
+        this.course.add(11, new Hole(3,14));
+        this.course.add(12, new Hole(5,16));
+        this.course.add(13, new Hole(3,6));
+        this.course.add(14, new Hole(5,18));
+        this.course.add(15, new Hole(4,2));
+        this.course.add(16, new Hole(4,10));
+        this.course.add(17, new Hole(4,8));
     }
 
     private void set_up_south_course() {
-        south_course.set(0, new Hole(5,11));
-        south_course.set(1, new Hole(4,7));
-        south_course.set(2, new Hole(3,13));
-        south_course.set(3, new Hole(4,5));
-        south_course.set(4, new Hole(4,9));
-        south_course.set(5, new Hole(5,17));
-        south_course.set(6, new Hole(3,15));
-        south_course.set(7, new Hole(5,1));
-        south_course.set(8, new Hole(4,3));
+        this.course.add(0, new Hole(5,11));
+        this.course.add(1, new Hole(4,7));
+        this.course.add(2, new Hole(3,13));
+        this.course.add(3, new Hole(4,5));
+        this.course.add(4, new Hole(4,9));
+        this.course.add(5, new Hole(5,17));
+        this.course.add(6, new Hole(3,15));
+        this.course.add(7, new Hole(5,1));
+        this.course.add(8, new Hole(4,3));
 
-        south_course.set(9, new Hole(4,4));
-        south_course.set(10, new Hole(5,18));
-        south_course.set(11, new Hole(3,12));
-        south_course.set(12, new Hole(4,8));
-        south_course.set(13, new Hole(4,2));
-        south_course.set(14, new Hole(5,16));
-        south_course.set(15, new Hole(3,10));
-        south_course.set(16, new Hole(4,14));
-        south_course.set(17, new Hole(4,6));
+        this.course.add(9, new Hole(4,4));
+        this.course.add(10, new Hole(5,18));
+        this.course.add(11, new Hole(3,12));
+        this.course.add(12, new Hole(4,8));
+        this.course.add(13, new Hole(4,2));
+        this.course.add(14, new Hole(5,16));
+        this.course.add(15, new Hole(3,10));
+        this.course.add(16, new Hole(4,14));
+        this.course.add(17, new Hole(4,6));
     }
 
 }

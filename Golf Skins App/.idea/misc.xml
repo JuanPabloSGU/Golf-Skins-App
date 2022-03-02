@@ -6,7 +6,7 @@
         <entry key="..\:/Users/J/Documents/Golf Skins App/Golf-Skins-App/Golf Skins App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/J/Documents/Golf Skins App/Golf-Skins-App/Golf Skins App/app/src/main/res/layout/activity_add_player.xml" value="0.33" />
         <entry key="..\:/Users/J/Documents/Golf Skins App/Golf-Skins-App/Golf Skins App/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/J/Documents/Golf Skins App/Golf-Skins-App/Golf Skins App/app/src/main/res/layout/activity_play_round.xml" value="0.22" />
+        <entry key="..\:/Users/J/Documents/Golf Skins App/Golf-Skins-App/Golf Skins App/app/src/main/res/layout/activity_play_round.xml" value="0.1" />
         <entry key="..\:/Users/J/Documents/Golf Skins App/Golf-Skins-App/Golf Skins App/app/src/main/res/layout/activity_select_course.xml" value="0.29846014492753625" />
         <entry key="..\:/Users/J/Documents/Golf Skins App/Golf-Skins-App/Golf Skins App/app/src/main/res/layout/activity_start_round.xml" value="0.1" />
       </map>
@@ -14,4 +14,11 @@
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.22" />
+      </ProjectState>
+    </option>
+  </component>
 </project>
