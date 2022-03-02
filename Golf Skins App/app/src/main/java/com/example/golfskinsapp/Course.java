@@ -31,6 +31,10 @@ public class Course {
         return result;
     }
 
+    public String get_hole_info(int index) {
+        return course.get(index).getHoleInfo();
+    }
+
     private void set_up_north_course() {
         this.course.add(0, new Hole(4,7));
         this.course.add(1, new Hole(5,13));

@@ -13,4 +13,12 @@ public class Player {
         String result = name + " with a handicap of " + handicap;
         return result;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getHandicap() {
+        return String.valueOf(handicap);
+    }
 }
