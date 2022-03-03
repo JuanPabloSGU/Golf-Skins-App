@@ -1,15 +1,28 @@
 package com.example.golfskinsapp;
 
-import java.nio.charset.StandardCharsets;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.security.SecureRandom;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Group {
     private ArrayList<Player> players;
     private Course course;
     private String unique_id;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public Group(ArrayList<Player> players, Course course) {
         this.players = players;
@@ -42,9 +55,9 @@ public class Group {
         String result = null;
 
         try{
-            SecureRandom prkey = SecureRandom.getInstance("SHA1PRNG");
+            SecureRandom random_num = SecureRandom.getInstance("SHA1PRNG");
             id = new byte[4];
-            prkey.nextBytes(id);
+            random_num.nextBytes(id);
 
             result = hexEncode(id);
         } catch (NoSuchAlgorithmException e) {
@@ -65,7 +78,41 @@ public class Group {
             result.append(digits[(bit&0x0f)]);
         }
 
+        if(is_unique_id(result.toString()) == false){
+            generate_unique_id();
+        }
+
         return result.toString();
+    }
+
+    private boolean is_unique_id(String key) {
+
+        final boolean[] unique_key = {true};
+
+        db.collection("Game")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot document : task.getResult()) {
+                                if(document.exists()) {
+                                    String result = document.getString("game_id");
+                                    if(result.equals(key)) {
+                                        unique_key[0] = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("Unique Failed", "Failed to access unique ID");
+            }
+        });
+
+        return unique_key[0];
     }
 
 }

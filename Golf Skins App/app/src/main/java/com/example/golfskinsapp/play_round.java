@@ -36,6 +36,7 @@ public class play_round extends AppCompatActivity {
     private Course course;
 
     private Group group;
+    private String group_id;
 
     TextView round_header;
     Button add_player, start_round, select_course;
@@ -128,6 +129,10 @@ public class play_round extends AppCompatActivity {
     public void OnSetStartRound(View view) {
         Intent intent = new Intent(getApplicationContext(), start_round.class);
         add_to_db();
+
+        // Pass intent with group_id to start_round to see the have a key that access the group
+        intent.putExtra("group_id", group_id);
+
         play_round.this.startActivity(intent);
     }
 
@@ -167,7 +172,7 @@ public class play_round extends AppCompatActivity {
             update_button_settings(start_round, Color.LTGRAY, Color.BLACK, false);
         }
 
-        if (player_count == 3 && chose_course){
+        if (player_count == 3){
             // Ready to play
             update_button_settings(start_round, Color.RED, Color.BLACK, true);
         }
@@ -182,11 +187,15 @@ public class play_round extends AppCompatActivity {
     private void add_to_db() {
 
         group = new Group(players, course);
+        group_id = group.getUnique_id();
+
+        System.out.println("Unique ID " + group_id);
 
         Map<String, Object> data = new HashMap<>();
         data.put("group", group);
         data.put("Players", players);
         data.put("course", course);
+        data.put("game_id", group_id);
 
         db.collection("Game")
                 .add(data)
