@@ -127,9 +127,7 @@ public class play_round extends AppCompatActivity {
 
     public void OnSetStartRound(View view) {
         Intent intent = new Intent(getApplicationContext(), start_round.class);
-
         add_to_db();
-
         play_round.this.startActivity(intent);
     }
 
