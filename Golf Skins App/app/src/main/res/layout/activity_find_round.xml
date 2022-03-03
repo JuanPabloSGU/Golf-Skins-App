@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".find_round">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,25 +15,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/find_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autoSizeMaxTextSize="100sp"
             android:autoSizeMinTextSize="32sp"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
-            android:text="Golf Skins App"
+            android:text="Find Group"
             android:fontFamily="@font/arvo"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="42sp" />
+            android:textSize="42sp"/>
 
-        <Button
-            android:id="@+id/play_round"
+        <TextView
+            android:id="@+id/find_heading_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:autoSizeMaxTextSize="24sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:text="Enter Group ID (ex: ######)"
+            android:fontFamily="@font/arvo"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            />
+
+        <EditText
+            android:id="@+id/group_id_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -41,11 +56,14 @@
             android:autoSizeMinTextSize="18sp"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
-            android:text="Play A Skins Game"
-            android:fontFamily="@font/arvo"/>
+            android:ems="10"
+            android:fontFamily="@font/arvo"
+            android:hint="Enter Group ID : "
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
 
         <Button
-            android:id="@+id/join_group"
+            android:id="@+id/group_id_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -53,9 +71,9 @@
             android:autoSizeMinTextSize="18sp"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
-            android:text="Join Skins Game"
-            android:fontFamily="@font/arvo"/>
+            android:fontFamily="@font/arvo"
+            android:text="Find Group" />
+
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

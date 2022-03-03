@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.golfskinsapp">
 
-    <!--
-    Main Activity - Main Page
-        play_round - Play a Skins Game button
-    -->
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,21 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GolfSkinsApp">
         <activity
+            android:name=".find_round"
+            android:exported="true" />
+        <activity
             android:name=".start_round"
             android:exported="true"
-            android:parentActivityName=".play_round"/>
+            android:parentActivityName=".play_round" />
         <activity
             android:name=".add_Player"
             android:exported="true"
-            android:parentActivityName=".play_round"/>
+            android:parentActivityName=".play_round" />
         <activity
             android:name=".select_course"
             android:exported="true"
-            android:parentActivityName=".play_round"/>
+            android:parentActivityName=".play_round" />
         <activity
             android:name=".play_round"
             android:exported="true"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

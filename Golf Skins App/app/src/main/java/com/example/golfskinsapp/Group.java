@@ -21,12 +21,15 @@ public class Group {
     private ArrayList<Player> players;
     private Course course;
     private String unique_id;
+    private boolean id_bool;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public Group(ArrayList<Player> players, Course course) {
         this.players = players;
         this.course = course;
+
+        id_bool = true;
 
         unique_id = generate_unique_id();
     }
@@ -87,19 +90,21 @@ public class Group {
 
     private boolean is_unique_id(String key) {
 
-        final boolean[] unique_key = {true};
-
         db.collection("Game")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        Log.w("Unique Complete", "Unique Key Generated");
+
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document : task.getResult()) {
                                 if(document.exists()) {
                                     String result = document.getString("game_id");
                                     if(result.equals(key)) {
-                                        unique_key[0] = false;
+                                        id_bool = false;
+                                        break;
                                     }
                                 }
                             }
@@ -112,7 +117,7 @@ public class Group {
             }
         });
 
-        return unique_key[0];
+        return id_bool;
     }
 
 }
