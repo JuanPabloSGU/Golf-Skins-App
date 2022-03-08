@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class Course {
 
     private ArrayList<Hole> course;
+    private int hole;
 
     public Course(String course) {
         this.course = new ArrayList<Hole>(17);
+        this.hole = 0;
 
         switch (course){
             case "north" :
@@ -33,6 +35,10 @@ public class Course {
 
     public String get_hole_info(int index) {
         return course.get(index).getHoleInfo();
+    }
+
+    public Hole get_current_hole(){
+        return course.get(hole);
     }
 
     private void set_up_north_course() {
