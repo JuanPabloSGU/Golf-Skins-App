@@ -14,6 +14,11 @@ public class Player {
         return result;
     }
 
+    public String getPlayerInfoBack() {
+        return "(" + name + " " + handicap + ")";
+
+    }
+
     public String getName() {
         return this.name;
     }

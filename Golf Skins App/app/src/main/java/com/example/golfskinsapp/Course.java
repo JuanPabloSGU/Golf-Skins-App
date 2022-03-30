@@ -1,10 +1,13 @@
 package com.example.golfskinsapp;
 
+import com.google.firebase.firestore.PropertyName;
+
 import java.util.ArrayList;
 
 public class Course {
 
     private ArrayList<Hole> course;
+    private String which_course;
     private int hole;
 
     public Course(String course) {
@@ -14,14 +17,16 @@ public class Course {
         switch (course){
             case "north" :
                 set_up_north_course();
+                which_course = "north";
                 break;
             case "south" :
                 set_up_south_course();
+                which_course = "south";
                 break;
         }
     }
 
-    public String get_course_info() {
+    private String get_course_info() {
         String result = "";
 
         int index = 0;
@@ -37,8 +42,13 @@ public class Course {
         return course.get(index).getHoleInfo();
     }
 
-    public Hole get_current_hole(){
-        return course.get(hole);
+    public String getWhichCourse() {
+        return this.which_course;
+    }
+
+    @PropertyName("_current_hole")
+    public String get_current_hole(){
+        return hole + " : " + course.get(hole).getHoleInfoBack() + " : " + getWhichCourse();
     }
 
     private void set_up_north_course() {

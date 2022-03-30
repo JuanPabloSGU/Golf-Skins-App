@@ -20,4 +20,7 @@ public class Hole {
     public String getHoleInfo() {
         return "Par : " + par + ", Stroke Index : " + stroke_index;
     }
+
+    public String getHoleInfoBack() {return "(" + par + " " + stroke_index + ")"; }
+
 }

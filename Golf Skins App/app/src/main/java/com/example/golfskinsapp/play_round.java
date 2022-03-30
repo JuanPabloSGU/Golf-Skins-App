@@ -189,15 +189,11 @@ public class play_round extends AppCompatActivity {
         group = new Group(players, course);
         group_id = group.getUnique_id();
 
-        System.out.println("Unique ID " + group_id);
-
         Map<String, Object> data = new HashMap<>();
-        data.put("group", group);
-        data.put("Players", players);
-        data.put("course", course);
+        data.put("Group", group);
         data.put("game_id", group_id);
 
-        db.collection("Game")
+        db.collection("SkinsGame")
                 .add(data)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

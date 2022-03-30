@@ -91,7 +91,7 @@ public class find_round extends AppCompatActivity {
 
     private void find_group() {
 
-        db.collection("Game")
+        db.collection("SkinsGame")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

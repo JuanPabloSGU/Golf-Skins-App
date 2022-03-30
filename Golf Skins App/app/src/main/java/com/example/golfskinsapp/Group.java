@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.PropertyName;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -25,6 +26,8 @@ public class Group {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    public Group() { }
+
     public Group(ArrayList<Player> players, Course course) {
         this.players = players;
         this.course = course;
@@ -34,22 +37,24 @@ public class Group {
         unique_id = generate_unique_id();
     }
 
-    public String getCourseInfo() {
-        return this.course.get_course_info();
-    }
-
+    @PropertyName("groupInfo")
     public String getGroupInfo() {
 
         String result = "";
         for(Player player : players) {
-            result += player.getPlayerInfo();
+            result += player.getPlayerInfoBack();
         }
 
         return result;
     }
 
+    @PropertyName("unique_id")
     public String getUnique_id() {
         return unique_id;
+    }
+
+    public String getCurrentHole() {
+        return this.course.get_current_hole().toString();
     }
 
     private String generate_unique_id() {
@@ -59,7 +64,7 @@ public class Group {
 
         try{
             SecureRandom random_num = SecureRandom.getInstance("SHA1PRNG");
-            id = new byte[4];
+            id = new byte[2];
             random_num.nextBytes(id);
 
             result = hexEncode(id);
