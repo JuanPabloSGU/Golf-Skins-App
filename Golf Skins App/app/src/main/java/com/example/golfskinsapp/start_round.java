@@ -4,32 +4,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.metrics.Event;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class start_round extends AppCompatActivity {
 
     private String group_id;
+    private String document_id;
 
     TextView title, player_1, player_2, player_3, player_4;
     EditText player_1_score, player_2_score, player_3_score, player_4_score;
@@ -58,10 +55,29 @@ public class start_round extends AppCompatActivity {
         Intent prev_intent = getIntent();
         group_id = prev_intent.getStringExtra("group_id");
 
-        dbRetrieve();
+        dbRetrieve(new SRCallBack() {
+            @Override
+            public void onCallBack(String documentID) {
+                document_id = documentID;
+            }
+        });
+
+        confirm_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { refreshPage(v); }
+        });
     }
 
-    private void dbRetrieve() {
+    public void refreshPage(View view) {
+        Intent intent = new Intent(getApplicationContext(), start_round.class);
+        intent.putExtra("group_id", group_id);
+
+        System.out.println("Why isn't this working " + document_id);
+
+        start_round.this.startActivity(intent);
+    }
+
+    private void dbRetrieve(SRCallBack myCallBack) {
         db.collection("SkinsGame")
                 .whereEqualTo("game_id", group_id)
                 .get()
@@ -70,12 +86,13 @@ public class start_round extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                 Log.d("RESULTS FROM DB : ", document.getId() + " => " + document.getData());
+                                Log.d("RESULTS FROM DB : ", document.getId() + " => " + document.getData());
                                 String result = document.get("Group").toString();
 
                                 updateTitle(result.split(",")[1]);
                                 updateGrouping(result.split(",")[2]);
 
+                                myCallBack.onCallBack(document.getId());
                             }
                         } else {
                             Log.d("RESULTS FROM DB : ", "Error getting documents : ", task.getException());
@@ -83,6 +100,7 @@ public class start_round extends AppCompatActivity {
                     }
                 });
     }
+
 
     private void updateTitle(String s) {
 
