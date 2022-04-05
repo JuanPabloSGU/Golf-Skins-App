@@ -15,7 +15,10 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -90,8 +93,7 @@ public class find_round extends AppCompatActivity {
     }
 
     private void find_group() {
-
-        db.collection("SkinsGame")
+        db.collection("UpdatedSkinsGame")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -100,7 +102,7 @@ public class find_round extends AppCompatActivity {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document : task.getResult()) {
                                 if(document.exists()) {
-                                    String db_result = document.getString("game_id");
+                                    String db_result = document.getId();
                                     if(db_result.compareTo(target_group_id) == 0) {
                                         id_bool = true;
                                         break;

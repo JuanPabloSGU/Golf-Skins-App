@@ -8,11 +8,13 @@ public class Course {
 
     private ArrayList<Hole> course;
     private String which_course;
-    private int hole;
+    private int currentHole;
+
+    public Course() {}
 
     public Course(String course) {
         this.course = new ArrayList<Hole>(17);
-        this.hole = 0;
+        this.currentHole = 0;
 
         switch (course){
             case "north" :
@@ -26,29 +28,37 @@ public class Course {
         }
     }
 
-    private String get_course_info() {
-        String result = "";
-
-        int index = 0;
-        for(Hole current_hole : this.course) {
-            index += 1;
-            result += "Current Hole : " + index + " That is a : " + current_hole.getHoleInfo() + "\n";
-        }
-
-        return result;
+    @PropertyName("course")
+    public ArrayList<Hole> getCourse() {
+        return this.course;
     }
 
-    public String get_hole_info(int index) {
-        return course.get(index).getHoleInfo();
+    @PropertyName("course")
+    public void setCourse(ArrayList<Hole> course) {
+        this.course = course;
     }
 
-    public String getWhichCourse() {
+    @PropertyName("which_Course")
+    public String getWhich_course() {
         return this.which_course;
     }
 
-    @PropertyName("_current_hole")
-    public String get_current_hole(){
-        return hole + " : " + course.get(hole).getHoleInfoBack() + " : " + getWhichCourse();
+    @PropertyName("which_Course")
+    public void setWhich_course(String which_course){
+        this.which_course = which_course;
+    }
+
+    @PropertyName("currentHole")
+    public int getCurrentHole() {
+        return this.currentHole;
+    }
+
+    public String getHole(int index) {
+        return course.get(index).getHoleInfo();
+    }
+
+    public String getCurrentHoleToString(){
+        return currentHole + " : " + course.get(currentHole).getHoleInfoBack() + " : " + getWhich_course();
     }
 
     private void set_up_north_course() {

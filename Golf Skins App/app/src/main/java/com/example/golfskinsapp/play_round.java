@@ -32,8 +32,8 @@ public class play_round extends AppCompatActivity {
 
     private int player_count = 0;
     private boolean chose_course = false;
-    private ArrayList<Player> players = new ArrayList<Player>();
-    private Course course;
+    private ArrayList<Player> Player = new ArrayList<Player>();
+    private Course Course;
 
     private Group group;
     private String group_id;
@@ -93,11 +93,11 @@ public class play_round extends AppCompatActivity {
 
                         String[] return_val = parseData(data.getExtras().getString("Player"));
 
-                        players.add(new Player(
+                        Player.add(new Player(
                                 return_val[0],Float.parseFloat(return_val[1])
                         ));
 
-                        update_text_view(player_count, players.get(player_count - 1));
+                        update_text_view(player_count, Player.get(player_count - 1));
                     }
                 }
             });
@@ -121,13 +121,14 @@ public class play_round extends AppCompatActivity {
 
                         // Use data to chose the course that the user has selected.
                         // Update the database. -> Later
-                        course = new Course(chosen_course);
+                        Course = new Course(chosen_course);
                     }
                 }
             });
 
     public void OnSetStartRound(View view) {
         Intent intent = new Intent(getApplicationContext(), start_round.class);
+
         add_to_db();
 
         // Pass intent with group_id to start_round to see the have a key that access the group
@@ -186,26 +187,25 @@ public class play_round extends AppCompatActivity {
 
     private void add_to_db() {
 
-        group = new Group(players, course);
+        group = new Group(Player, Course);
         group_id = group.getUnique_id();
 
         Map<String, Object> data = new HashMap<>();
         data.put("Group", group);
-        data.put("game_id", group_id);
 
-        db.collection("SkinsGame")
-                .add(data)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("UpdatedSkinsGame")
+                .document(group_id)
+                .set(data)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("Group Saved", "Group has been saved");
+                    public void onSuccess(Void unused) {
+                        Log.d("DataBase", "Group uploaded to the DB");
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Group Saved", "Group has not been saved");
-                    }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("DataBase", "Group is not uploaded to the DB");
+            }
+        });
     }
 }

@@ -1,19 +1,25 @@
 package com.example.golfskinsapp;
 
+import com.google.firebase.firestore.PropertyName;
+
 public class Hole {
     private int par;
     private int stroke_index;
+
+    public Hole() {}
 
     public Hole(int par, int stroke_index) {
         this.par = par;
         this.stroke_index = stroke_index;
     }
 
-    public int get_par() {
+    @PropertyName("par")
+    public int getPar() {
         return par;
     }
 
-    public int get_stroke_index() {
+    @PropertyName("stroke_index")
+    public int getStroke_index() {
         return stroke_index;
     }
 
@@ -22,5 +28,15 @@ public class Hole {
     }
 
     public String getHoleInfoBack() {return "(" + par + " " + stroke_index + ")"; }
+
+    @PropertyName("par")
+    public void setPar(int par) {
+        this.par = par;
+    }
+
+    @PropertyName("stroke_index")
+    public void setStroke_index(int stroke_index) {
+        this.stroke_index = stroke_index;
+    }
 
 }

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Sends user to the play_round page
+     * Sends user to start the round page
      * @param view
      */
     public void onSetPlayButton(View view) {
@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.this.startActivity(intent);
     }
 
+    /**
+     * Sends user to find a round page
+     * @param view
+     */
     public void onSetJoinButton(View view) {
         Intent intent = new Intent(getApplicationContext(), find_round.class);
         MainActivity.this.startActivity(intent);

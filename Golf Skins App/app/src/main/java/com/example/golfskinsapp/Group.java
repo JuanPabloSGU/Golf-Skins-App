@@ -37,15 +37,9 @@ public class Group {
         unique_id = generate_unique_id();
     }
 
-    @PropertyName("groupInfo")
-    public String getGroupInfo() {
-
-        String result = "";
-        for(Player player : players) {
-            result += player.getPlayerInfoBack();
-        }
-
-        return result;
+    @PropertyName("unique_id")
+    public void setUnique_id(String unique_id) {
+        this.unique_id = unique_id;
     }
 
     @PropertyName("unique_id")
@@ -53,8 +47,34 @@ public class Group {
         return unique_id;
     }
 
-    public String getCurrentHole() {
-        return this.course.get_current_hole().toString();
+    @PropertyName("course")
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    @PropertyName("course")
+    public Course getCourse() {
+        return this.course;
+    }
+
+    @PropertyName("players")
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    @PropertyName("players")
+    public ArrayList<Player> getPlayers() {
+        return this.players;
+    }
+
+    @PropertyName("id_bool")
+    public void setId_bool(Boolean bool) {
+        this.id_bool = bool;
+    }
+
+    @PropertyName("id_bool")
+    public Boolean getId_bool() {
+        return this.id_bool;
     }
 
     private String generate_unique_id() {
@@ -80,13 +100,12 @@ public class Group {
 
         char[] digits = {'0', '1', '2', '3', '4','5','6','7','8','9','a','b','c','d','e','f'};
 
-        for(int i = 0; i < id.length; i++){
-            byte bit = id[i];
-            result.append(digits[(bit&0xf0) >> 4]);
-            result.append(digits[(bit&0x0f)]);
+        for (byte bit : id) {
+            result.append(digits[(bit & 0xf0) >> 4]);
+            result.append(digits[(bit & 0x0f)]);
         }
 
-        if(is_unique_id(result.toString()) == false){
+        if(!is_unique_id(result.toString())){
             generate_unique_id();
         }
 
@@ -94,15 +113,12 @@ public class Group {
     }
 
     private boolean is_unique_id(String key) {
-
         db.collection("Game")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
                         Log.w("Unique Complete", "Unique Key Generated");
-
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document : task.getResult()) {
                                 if(document.exists()) {
@@ -124,7 +140,4 @@ public class Group {
 
         return id_bool;
     }
-
-
-
 }
